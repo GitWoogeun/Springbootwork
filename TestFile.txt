@@ -9,7 +9,14 @@ Develop Time        : 2023-04-06 ~ 2023-04-17
 
 STS 웹 개발 환경 셋팅
  - STS4 JavaEE 플러그인 설치(Jsp 웹 개발 환경)
+   => STS => Help => EclipseMarketPlace에서 =>
+   => Eclipse Enterprise Java and Web Developer Tools Download
+
  - STS4 Lombok 플러그인 설치
+   => progjectlombok.org 사이트에서 Lombok 설치 후=> STS에 적용하기
+   => 터미널 환경에서 java -jar lombok.jar 입력 => Lombok 위치 STS에 잡아주기 끝!
+ 
  - STS4 폰트 및 인코딩 설정
+ 
  - STS4 Javascript 파일 인식 설정( Window -> preference -> File Associations 
    -> Add -> *.js 추가 -> Generic Text Editor [Defalut]설정
