@@ -17,6 +17,11 @@ STS 웹 개발 환경 셋팅
    => 터미널 환경에서 java -jar lombok.jar 입력 => Lombok 위치 STS에 잡아주기 끝!
  
  - STS4 폰트 및 인코딩 설정
- 
  - STS4 Javascript 파일 인식 설정( Window -> preference -> File Associations 
    -> Add -> *.js 추가 -> Generic Text Editor [Defalut]설정
+
+ - Spring Version과 Java Version 맞추기 ( 엄청 중요!!  이것 때문에 진짜 개고생 했음 )
+   => Java Version 1.8을 사용하고 있지만, Spring Version을 3.0.5을 사용 하고 있어서
+      Application Content 오류가 계속 발생! ( 구글링해도 해결 안됐음 )
+   => 지금 현재 Spring Version : 2.2.6.RELEASE Version 사용
+   => 지금 현재 Java   Version : JDK 1.8 Version 사용
