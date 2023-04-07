@@ -1,6 +1,4 @@
 package com.cos.blog.test;
-
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,16 +7,14 @@ import lombok.NoArgsConstructor;
 // private은   : 다이렉트로 접근하지마!
 // public은      : 어디서든 접근할 수 있어~
 // protected : 내 자식들에게만 상속해줄거야~
-
 @Data										// getter와 setter
 @NoArgsConstructor			// 빈 생성자
 public class Member {
+	
 	// 자바에서 변수를 private으로 만드는 이유 :
 	// => 자바는 OOP : 객체지향이기 때문에 캡슐화를 하기 위해
 	// => 변수에 다이렉트로 연결해서 변수의 값을 변경할수 없게 하기 위해서 ( Java = 객체지향이니까 )
 	// => 변수는 생성자를 통해서 값을 변경해줘야 한다.
-	
-	
 	private int id;
 	private String username;
 	private String password;
@@ -38,6 +34,4 @@ public class Member {
 //		this.password = password;
 //		this.email = email;
 //	}
-	
-	
 }
