@@ -6,13 +6,19 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="runtime"/>
+		<item key="selection" value="lombok"/>
 		<list key="findhistory">
+			<item value="lombok"/>
+			<item value="username"/>
+			<item value="userName"/>
+			<item value="already"/>
+			<item value="8080"/>
 			<item value="runtime"/>
 			<item value="JPA"/>
 			<item value="MYQL"/>
 		</list>
 		<list key="replacehistory">
+			<item value="username"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
