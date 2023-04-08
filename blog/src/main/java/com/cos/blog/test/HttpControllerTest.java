@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.Getter;
-
 // 사용자가 요청을 했을 때 -> 응답(Data)   @RestController
 // 사용자가 요청을 했을 때 -> 응답(Html)   @Controller
 
@@ -18,6 +16,8 @@ public class HttpControllerTest {
 	// 문자열 생성 BATCH_ID처럼 클래스 이름을 알려주기 위해 선언 및 정의
 	private static final String TAG = "HttpControllerTest : ";
 	
+	
+	// http://localhost:8000/blog/http/lombok
 	@GetMapping("/http/lombok")
 	public String lombokTest() {
 		// 빌더패턴을 사용 시 장점 : 내가 값을 넣는 순서를 지키지 않아도 된다.
