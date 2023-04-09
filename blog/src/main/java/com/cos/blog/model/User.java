@@ -11,10 +11,19 @@ import javax.persistence.Id;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 // ORM -> Java Object를 테이블로 매핑해주는 기술
 // 이 클래스를 테이블화 시키기 위해서는 Entity라는 어노테이션을 쓴다.
 // User클래스가 변수들을 읽어서 자동으로 MySQL에 테이블이 생성이 된다.
-@Entity
+@Data
+@NoArgsConstructor   // 빈 생성자
+@AllArgsConstructor   // 전체 생성자
+@Builder						   // 빌더 패턴!! ( 나중에 알아서 알게 된다 )
+@Entity							  // @Entity는 ORM 클래스다 라고 말해주는거기 때문에 제일 가까이 써주는게 좋다
 public class User {
 	
 		@Id		// Primary Key																					// Oracle일 경우 시퀀스, MySQL일 경우 auto_increament를 따라감

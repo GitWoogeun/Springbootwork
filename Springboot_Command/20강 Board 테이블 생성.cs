@@ -17,6 +17,7 @@ public class Board {
     @ColumnDefault("0")			    // 얘는 int니까 ' '가 필요 없다.
     private int count; 				// 조회수
     
+    // Board라는 테이블에 userId 컬럼은 User테이블의  Id라는 컬럼을 참조하고 있다고 자동으로 FK 제약조건 생성
     @ManyToOne   					// Many = Board / One = User : 한명의 유저는 여러개의 게시글을 쓸수 있다.
     @JoinColumn(name = "userId")	// 데이터베이스의 컬럼으로는 userId로 만들어질거에요~
     private User user; 				// DB는 오브젝트를 저장할 수 없다. FK, 자바는 오브젝트를 저장할 수 있다.
