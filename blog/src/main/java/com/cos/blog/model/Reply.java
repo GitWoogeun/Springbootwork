@@ -46,6 +46,7 @@ public class Reply {
 		
 		@CreationTimestamp      // 자동으로 댓글이 달린 시간으로 자동 저장
 		private Timestamp createDate;  // 답변 등록 시간
+		
 }
 
 
