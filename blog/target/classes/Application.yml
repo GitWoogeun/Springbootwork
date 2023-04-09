@@ -10,8 +10,8 @@ server:
 spring:
   mvc:
     view:
-      prefix: /WEB-INF/views/
-      suffix: .jsp
+      prefix: /WEB-INF/views/                 # prefix : Controller가 리턴을할 때 앞에 붙여주는 경로 명
+      suffix: .jsp                                            # suffix : Controller가 리턴을할 때 뒤에 붙여주는 경로 명 
       
   datasource:                                                                                                                 # database 설정
     driver-class-name: com.mysql.cj.jdbc.Driver

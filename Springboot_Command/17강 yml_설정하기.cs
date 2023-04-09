@@ -15,7 +15,7 @@
 server:
   port: 8000
   servlet:
-    context-path: /blog
+    context-path: /blog                       # context-path : 내 프로젝트에 들어가기 위한 진입장벽   => http://localhost:8000/blog/~
     encoding:
       charset: UTF-8
       enabled: true
@@ -24,10 +24,10 @@ server:
 spring:
   mvc:
     view:
-      prefix: /WEB-INF/views/
-      suffix: .jsp
+      prefix: /WEB-INF/views/                 # prefix : Controller가 리턴을할 때 앞에 붙여주는 경로 명
+      suffix: .jsp                            # suffix : Controller가 리턴을할 때 뒤에 붙여주는 경로 명 
       
-  datasource:
+  datasource:                                 # database 설정
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul
     username: cos
@@ -47,5 +47,15 @@ spring:
   jackson:
     serialization:
       fail-on-empty-beans: false
+
+
+# pom.xml파일 설정
+# JSP 템플릿 엔진  jasper가 없으면 main폴더에서 JSP파일을 인식하지 못함
+# static 폴더는 정적파일만 놓을 수 있다. 
+<dependency>
+	<groupId>org.apache.tomcat</groupId>
+	<artifactId>tomcat-jasper</artifactId>
+	<version>9.0.22</version>
+</dependency>
 
 
