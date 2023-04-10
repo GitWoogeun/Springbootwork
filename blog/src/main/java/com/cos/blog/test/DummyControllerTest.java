@@ -171,7 +171,7 @@ public class DummyControllerTest {
 		}
 		
 		/*
-		 *		// Email하고 Password를 수정해볼것이라서 받아야 한다.
+		// Email하고 Password를 수정해볼것이라서 받아야 한다.
 		// Update는 PUT으로 처리해야합니다. ( ID를 찾을 @GetMapping("/dummy/user/{id}")과 URL이 똑같아도 호출 방법이 달라서 괜찮다 )
 		// JSON 데이터를 받아서 테스트 해볼려면 ( @RequestBody 어노테이션이 필요 )
 		@PutMapping("/dummy/user/{id}")
@@ -202,6 +202,5 @@ public class DummyControllerTest {
 				
 				return null;
 		} 
-		 */
-		
+		 */	
 }

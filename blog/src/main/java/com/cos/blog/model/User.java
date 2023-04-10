@@ -32,8 +32,8 @@ public class User {
 		@GeneratedValue(strategy = GenerationType.IDENTITY)			//(GenerationType.IDENTITY) 프로젝트에서 연결된 DB의 넘버링 전략을 따라간다.
 		private int id;																								// Oracle == 시퀀스, MySQL == auto_increament
 		
-		// null값이면 안된다. / 아이디의 길이는 30자까지
-		@Column(nullable = false, length = 30)
+		// null값이면 안된다. / 아이디의 길이는 30자까지 / 중복된 값을 넣어주지 않는다.
+		@Column(nullable = false, length = 30, unique = true)
 		private String username;					// 아이디
 		
 		// null값이면 안된다. / 아이디의 길이는 100자까지  => 해쉬 ( 비밀번호 암호화 할꺼임 )
