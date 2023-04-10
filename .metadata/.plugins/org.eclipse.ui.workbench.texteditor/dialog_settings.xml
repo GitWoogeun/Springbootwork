@@ -6,16 +6,23 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="lombok"/>
+		<item key="selection" value="Save"/>
 		<list key="findhistory">
+			<item value="save"/>
+			<item value="Java Object"/>
+			<item value="drop"/>
+			<item value="Dynamic"/>
+			<item value="rol"/>
+			<item value="Save"/>
+			<item value="Crud"/>
+			<item value="crud"/>
+			<item value="CrudRep"/>
+			<item value="C"/>
+			<item value="Current"/>
+			<item value="create"/>
+			<item value="JSP"/>
 			<item value="lombok"/>
 			<item value="username"/>
-			<item value="userName"/>
-			<item value="already"/>
-			<item value="8080"/>
-			<item value="runtime"/>
-			<item value="JPA"/>
-			<item value="MYQL"/>
 		</list>
 		<list key="replacehistory">
 			<item value="username"/>

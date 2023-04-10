@@ -94,7 +94,8 @@ public class DummyControllerTest {
 			User user = userRepository.findById(id).orElseThrow(new Supplier<IllegalArgumentException>() {
 				@Override
 				public IllegalArgumentException get() {
-					return new IllegalArgumentException(" Supplier<lllegalArgumentExeption>()의 해당 유저의 정보는 없습니다. id : " + id);
+					// Supplier<lllegalArgumentExeption>()의 해당 유저의 정보는 없습니다. id : " + id
+					return new IllegalArgumentException("  해당 유저의 정보는 없습니다. id : " + id);
 				}
 			});
 			
