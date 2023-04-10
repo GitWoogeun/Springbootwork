@@ -112,15 +112,19 @@ public class DummyControllerTest {
 			return user;
 		}
 		
-		
-		// Email하고 Password를 수정해볼것이라서 받아야 한다.
-		// Update는 PUT으로 처리해야합니다. ( ID를 찾을 @GetMapping("/dummy/user/{id}")과 URL이 똑같아도 호출 방법이 달라서 괜찮다 )
-		// JSON 데이터를 받아서 테스트 해볼려면 ( @RequestBody 어노테이션이 필요 )
+		// @Transaction을 붙여놓으면 데이터베이스에 Transaction이 시작이 된다.
+		// Transaction이 시작이되고 어떻게 되냐면 언제 종료가 되냐면 이 Controller가 종료될 때 Transaction이 종료가 되거든요!
+		// 그럼 자동으로 UpdateUser 함수가 시작할때 Transaction이 시작이 되었다가 함수가 종료가 될때 Transaction도 종료가 되면서
+		// 함수 종료 시 자동 commit이 된다. 
 		@Transactional
 		@PutMapping("/dummy/user/{id}")
 		public User updateUser(@PathVariable int id,
 													 @RequestBody User requestUser) 	//@RequestBody Json 데이터를 요청 => Java Object ( MessageConverter의 Jackson 라이브러리가 변환해서 받아줘요. )
 		{
+				// Email하고 Password를 수정해볼것이라서 받아야 한다.
+				// Update는 PUT으로 처리해야합니다. ( ID를 찾을 @GetMapping("/dummy/user/{id}")과 URL이 똑같아도 호출 방법이 달라서 괜찮다 )
+				// JSON 데이터를 받아서 테스트 해볼려면 ( @RequestBody 어노테이션이 필요 )
+			
 				System.out.println("id : " + id);
 				System.out.println("password : " + requestUser.getPassword());
 				System.out.println("email         : " + requestUser.getEmail());
@@ -128,12 +132,14 @@ public class DummyControllerTest {
 				
 				// save()함수는 엔티티의 모든 컬럼이 저장이되어야 하기 때문에 Update를 할때는 별로 추천하지 않지만..
 				// save()를 사용하여 Update를 할려면 아래 처럼 데이터베이스에 존재하는 유저를 찾아 변경하고자 하는 컬럼을 set으로 지정해줘야한다.
+				// 영속화
 				User user = userRepository.findById(id).orElseThrow(()->{
 						return new IllegalArgumentException("수정에 실패 하였습니다.");
 				});
 				
 				
 				// 변경 요청한 paassword와 email을 user객체에 저장
+				// 여기서 영속화된 오브젝트 수정
 				user.setPassword(requestUser.getPassword());
 				user.setEmail(requestUser.getEmail());
 				
@@ -146,6 +152,7 @@ public class DummyControllerTest {
 				
 				// @Transactional을 사용하면 save()함수를 사용하지 않아도 Update를 할수 있다.
 				// 더티 체킹 : 데이터베이스 SELECT를 해서 받아와서 값만 변경하고 위에다가 @Transaction만 걸면 Update가 된다.
+				// Controller가 종료가 될 때 데이터베이스에 수정을 날려준다. ( 이걸 더티 체킹이라고 한다 )
 				return null;
 		}
 		
