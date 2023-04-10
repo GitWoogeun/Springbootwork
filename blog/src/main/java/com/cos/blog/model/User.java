@@ -4,11 +4,12 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.AllArgsConstructor;
@@ -23,6 +24,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor   // 빈 생성자
 @AllArgsConstructor   // 전체 생성자
 @Builder						   // 빌더 패턴!! ( 나중에 알아서 알게 된다 )
+//@DynamicInsert			  // insert할때 null인 필드를 제외 시켜준다. ( role 같은 경우 Default 데이터를 받을려면 DynamicInsert 어노테이션을 사용 할 수도 있다. )
 @Entity							  // @Entity는 ORM 클래스다 라고 말해주는거기 때문에 제일 가까이 써주는게 좋다
 public class User {
 	
@@ -41,12 +43,17 @@ public class User {
 		@Column(nullable = false, length = 50)
 		private String email;							// 이메일
 		
-		// (" 'user' ") 문자열이라는걸 알려줘야한다.
-		@ColumnDefault("'user'")					// Enum을 사용하면 도메인을 설정할수있다. ( 도메인이 정해졌다 == 어떤 범위가 정해 졌다.  EX 성별이라치면 남, 녀로만 )
-		private String role;								// Enum을 쓰는게 좋다. ( Role : 어떤 회원가입을 했을 때 이 사람은 admin, user, manage )
+//    Enum방식으로 사용
+//		// (" 'user' ") 문자열이라는걸 알려줘야한다.
+//		@ColumnDefault("'user'")							// Enum을 사용하면 도메인을 설정할수있다. ( 도메인이 정해졌다 == 어떤 범위가 정해 졌다.  EX 성별이라치면 남, 녀로만 )
+//		private String role;										// Enum을 쓰는게 좋다. ( Role : 어떤 회원가입을 했을 때 이 사람은 admin, user, manage )
+											
 		
-		// 회원의 가입의 시간
-		@CreationTimestamp						// 시간이 자동으로 입력
-		private Timestamp	createDate;		// 등록일자 ( // Java SQL이 가지고 있음 )
+		// DB는 RoleType 이라는게 없다. 그렇기 때문에 @Enumerated ( EnumType.STRING )으로 문자열이라고 명시 해줘야한다.
+		@Enumerated(EnumType.STRING)
+		private RoleType role; 	// Enum 방식 사용	// ADMIN, USER
 		
+		// 회원의 가입의 시간										// Spring에서 @CreationTimestamp 어노테이션을 붙이면 => 자바에서 현재시간을 만들어서 insert해준다.
+		@CreationTimestamp								// 시간이 자동으로 입력
+		private Timestamp	createDate;				// 등록일자 ( // Java SQL이 가지고 있음 )
 }
