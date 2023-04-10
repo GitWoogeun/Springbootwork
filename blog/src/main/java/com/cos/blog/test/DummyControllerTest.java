@@ -6,10 +6,12 @@ import java.util.function.Supplier;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -153,7 +155,18 @@ public class DummyControllerTest {
 				// @Transactional을 사용하면 save()함수를 사용하지 않아도 Update를 할수 있다.
 				// 더티 체킹 : 데이터베이스 SELECT를 해서 받아와서 값만 변경하고 위에다가 @Transaction만 걸면 Update가 된다.
 				// Controller가 종료가 될 때 데이터베이스에 수정을 날려준다. ( 이걸 더티 체킹이라고 한다 )
-				return null;
+				return user;
+		}
+		
+		// 데이터 삭제
+		@DeleteMapping("/dummy/user/{id}")
+		public String delete(@PathVariable int id) {
+			try {
+				userRepository.deleteById(id);
+			} catch (EmptyResultDataAccessException e) {
+				return "삭제를 실패했습니다. 해당 ID : " + id + "가 데이터베이스에 없습니다.";
+			}
+			return "ID : " + id + "번이삭제되었습니다.";
 		}
 		
 		/*
