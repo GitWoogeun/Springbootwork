@@ -18,5 +18,4 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 		//																											CrudRepository에는 deleteById ( Id로 값으로 레코드를 찾는 것 )
 	
 		
-		
 }
