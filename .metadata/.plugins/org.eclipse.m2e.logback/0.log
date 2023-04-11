@@ -6015,3 +6015,4 @@ Caused by: org.apache.maven.model.building.ModelBuildingException: 1 problem was
 2023-04-11 17:33:36,344 [Worker-12: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
 2023-04-11 17:33:36,353 [Worker-12: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2023-04-11 17:33:36,354 [Worker-12: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\MyProject\Spring\workspace\Springbootwork\blog\src\test\resources
+2023-04-11 17:35:04,370 [Worker-0: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
