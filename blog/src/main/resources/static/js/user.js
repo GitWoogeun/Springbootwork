@@ -4,7 +4,7 @@ let index = {
 			// on : 첫번재  파라미터를 결정하고 클릭이 되면 두번째 파라미터가 무엇을할지 정하면 된다.
 			// => : 화살표 함수 : function() {} / 대신 () => {} 사용한 이유는 this를 바인딩하기 위해서 사용
 			$("#btn-save").on("click", ()=>{
-					this.save();		// 회원가입 버튼을 클릭 했을 시 save: function()을 호출
+					this.save();		// <= 회원가입 버튼을 클릭 했을 시 save: function()을 호출
 			});
 		},
 		

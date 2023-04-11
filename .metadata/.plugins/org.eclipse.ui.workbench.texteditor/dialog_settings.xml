@@ -6,8 +6,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="action"/>
+		<item key="selection" value="contain"/>
 		<list key="findhistory">
+			<item value="contain"/>
 			<item value="action"/>
 			<item value="save"/>
 			<item value="Java Object"/>
@@ -22,7 +23,6 @@
 			<item value="Current"/>
 			<item value="create"/>
 			<item value="JSP"/>
-			<item value="lombok"/>
 		</list>
 		<list key="replacehistory">
 			<item value="username"/>
