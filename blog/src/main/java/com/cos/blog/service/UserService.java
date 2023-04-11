@@ -19,16 +19,8 @@ public class UserService {
 		// 회원가입 함수의 전체가 하나의 트랜잭션이 된다. 전체가 실행이되면 그때 커밋이 될꺼구요
 		// 트랜잭션중 하나라도 실패를 한다면 커밋이 되지 않고 RollBack이 될겁니다.
 		@Transactional
-		public int 회원가입(User user) {
-			try {
-				// userRepository 하나의 트랜잭션
-				userRepository.save(user);
-				return 1;
-			} catch (Exception  e) {
-				// TODO: handle exception
-				e.printStackTrace();
-				System.out.println("UserService : 회원가입() : " + e.getMessage());
-			}
-			return -1;
+		public void 회원가입(User user) {
+			// userRepository 하나의 트랜잭션
+			userRepository.save(user);
 		}
 }
