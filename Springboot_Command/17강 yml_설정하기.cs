@@ -15,7 +15,7 @@
 server:
   port: 8000
   servlet:
-    context-path: /blog                       # context-path : 내 프로젝트에 들어가기 위한 진입장벽   => http://localhost:8000/blog/~
+    context-path: /blog         // context-path : 내 프로젝트에 들어가기 위한 진입장벽   => http://localhost:8000/blog/~
     encoding:
       charset: UTF-8
       enabled: true
@@ -24,10 +24,10 @@ server:
 spring:
   mvc:
     view:
-      prefix: /WEB-INF/views/                 # prefix : Controller가 리턴을할 때 앞에 붙여주는 경로 명
-      suffix: .jsp                            # suffix : Controller가 리턴을할 때 뒤에 붙여주는 경로 명 
+      prefix: /WEB-INF/views/   // prefix : Controller가 리턴을할 때 앞에 붙여주는 경로 명
+      suffix: .jsp              // suffix : Controller가 리턴을할 때 뒤에 붙여주는 경로 명 
       
-  datasource:                                 # database 설정
+  datasource:                   // database 설정
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul
     username: cos
