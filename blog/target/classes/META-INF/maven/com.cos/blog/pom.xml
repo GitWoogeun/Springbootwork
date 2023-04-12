@@ -19,12 +19,10 @@
 	<dependencies>
 		<!-- 추가 라이브러리 시작 -->
 		<!-- 시큐리티 태그 라이브러리 -->
-		<!--
 		<dependency>
   			<groupId>org.springframework.security</groupId>
   			<artifactId>spring-security-taglibs</artifactId>
 		</dependency>
-		-->
 		
 		<!-- JSP 템플릿 엔진  jasper가 없으면 main폴더에서 JSP파일을 인식하지 못함 -->
 		<!-- static 폴더는 정적파일만 놓을 수 있다. -->
@@ -45,12 +43,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		<!-- 시큐리티는 잠시 주석 처리
+		<!-- 시큐리티 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-		-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -80,13 +77,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!--
+		<!-- 스프링 시큐리티 -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		-->
 	</dependencies>
 	<build>
 		<plugins>

@@ -19,6 +19,6 @@
 	</form>
 	<button id="btn-login" class="btn btn-primary">로그인</button>
 </div>
-<script src="/blog/js/user.js"></script>
+<script src="/js/user.js"></script>
 <!--  div class container : container는 header 영역과 footer 영역 안에 포함되어있는 공간 -->
 <%@ include file="../layout/footer.jsp"%>

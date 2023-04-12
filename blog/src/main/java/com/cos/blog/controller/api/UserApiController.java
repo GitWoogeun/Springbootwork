@@ -1,7 +1,5 @@
 package com.cos.blog.controller.api;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,15 +19,12 @@ public class UserApiController {
 		// DI ( Spring이 컴포넌트 스캔할 때 스프링 빈을 통해서 IoC에 띄어준다 )
 		@Autowired
 		private UserService userService;
-	
-		// 스프링 DI로 의존성에의 해서 호출해서 사용할 수 있다.
-		@Autowired
-		private HttpSession session;
 		
 		// JSON이니까 @RequestBody로 파라미터 받음
 		// 통신상태를 확인하기 위해 HttpStatus.OK 
 		@PostMapping("/api/user")
 		public ResponseDto<Integer> save(@RequestBody User user) {		
+
 			System.out.println("UserApiController : save 호출됨!");
 			
 			// username, password, email 입력값 form태그에서 받음
@@ -44,19 +39,19 @@ public class UserApiController {
 			return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);	
 		}
 		
-		// 전통적인 로그인 방식
-		// 다음시간에 스프링 시큐리티 이용해서 로그인!!
-		@PostMapping("/api/user/login")
-		public ResponseDto<Integer> login(@RequestBody User user) {
-			System.out.println("UserApiController : login 호출됨");
-			User principal = userService.로그인(user);		// Printcipal = 정보주체의
-			
-			// 유저 로그인 정보가 null이 아니라면
-			if( principal != null) {
-				// 이렇게 하면 session이 만들어집니다.
-				session.setAttribute("principal", principal);
-			}
-			
-			return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);			
-		}
+//		// 전통적인 로그인 방식
+//		// 다음시간에 스프링 시큐리티 이용해서 로그인!!
+//		@PostMapping("/api/user/login")
+//		public ResponseDto<Integer> login(@RequestBody User user, HttpSession session) {
+//			System.out.println("UserApiController : login 호출됨");
+//			User principal = userService.로그인(user);		// Printcipal = 정보주체의
+//			
+//			// 유저 로그인 정보가 null이 아니라면
+//			if( principal != null) {
+//				// 이렇게 하면 session이 만들어집니다.
+//				session.setAttribute("principal", principal);
+//			}
+//			
+//			return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);			
+//		}
 }

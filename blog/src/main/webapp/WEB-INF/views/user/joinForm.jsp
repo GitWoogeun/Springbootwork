@@ -23,7 +23,7 @@
 </div>
 
 <!-- js 폴더 / user.js 파일 연결  -->
-<script src="/blog/js/user.js"></script>
+<script src="/js/user.js"></script>
 
 <!--  div class container : container는 header 영역과 footer 영역 안에 포함되어있는 공간 -->
 <%@ include file="../layout/footer.jsp"%>
