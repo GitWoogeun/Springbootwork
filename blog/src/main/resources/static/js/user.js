@@ -6,9 +6,9 @@ let index = {
 			$("#btn-save").on("click", ()=>{
 					this.save();		// <= 회원가입 버튼을 클릭 했을 시 save: function()을 호출
 			});
-			$("#btn-login").on("click", ()=>{
-					this.login();		// <= 회원가입 버튼을 클릭 했을 시 save: function()을 호출
-			});
+//			$("#btn-login").on("click", ()=>{
+//					this.login();		// <= 회원가입 버튼을 클릭 했을 시 save: function()을 호출
+//			});
 		},
 		
 		save: function(){
@@ -27,7 +27,7 @@ let index = {
 			// ajax가 통신을 성공하고 나서 서버가 json을 리턴해주면 자동으로 자바 오브젝트로 변환해주네요 
 			$.ajax({
 				type: "post",									// POST방식으로 전송
-				url: "/api/user",					// UserApiController의 save() 함수 호출					
+				url: "/auth/joinProc",					// UserApiController의 save() 함수 호출					
 				data: JSON.stringify(data),		// JSON 문자열로 data ( http body 데이터 ) 변경 (MIME 타입이 필요)
 				contentType: "application/json; charset=utf-8",
 				dataType: "json"							// 요청을 서버로해서 응답이 왔을 때 기본적으로 모든 것이 버퍼로 오기 때문에 응답값은 String 입니다.
@@ -44,7 +44,7 @@ let index = {
 			});
 		},
 		
-		// 로그인 기능 구현
+/*		// 로그인 기능 구현
 		login: function(){
 			alert("로그인이 되었습니다.");
 			let data = {
@@ -69,6 +69,7 @@ let index = {
 				alert(JSON.spstringify(error));
 			});
 	    }
+	    */
 }
 
 index.init();

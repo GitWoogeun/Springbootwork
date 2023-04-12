@@ -6,10 +6,14 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="password"/>
+		<item key="selection" value="create"/>
 		<list key="findhistory">
-			<item value="password"/>
+			<item value="create"/>
+			<item value="security"/>
+			<item value="al"/>
 			<item value="alrea"/>
+			<item value="로그인"/>
+			<item value="password"/>
 			<item value="securi"/>
 			<item value="when"/>
 			<item value="securo"/>
@@ -17,12 +21,8 @@
 			<item value="s"/>
 			<item value="loginForm"/>
 			<item value="login"/>
-			<item value="al"/>
 			<item value="alreay"/>
 			<item value="JSTL"/>
-			<item value="form"/>
-			<item value="contain"/>
-			<item value="action"/>
 		</list>
 		<list key="replacehistory">
 			<item value="username"/>

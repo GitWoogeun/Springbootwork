@@ -22,7 +22,7 @@ public class UserApiController {
 		
 		// JSON이니까 @RequestBody로 파라미터 받음
 		// 통신상태를 확인하기 위해 HttpStatus.OK 
-		@PostMapping("/api/user")
+		@PostMapping("/auth/joinProc")
 		public ResponseDto<Integer> save(@RequestBody User user) {		
 
 			System.out.println("UserApiController : save 호출됨!");
@@ -38,20 +38,21 @@ public class UserApiController {
 			// 자바 오브젝트를 JSON으로 변환해서 리턴 (Jackson)
 			return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);	
 		}
-		
-//		// 전통적인 로그인 방식
-//		// 다음시간에 스프링 시큐리티 이용해서 로그인!!
-//		@PostMapping("/api/user/login")
-//		public ResponseDto<Integer> login(@RequestBody User user, HttpSession session) {
-//			System.out.println("UserApiController : login 호출됨");
-//			User principal = userService.로그인(user);		// Printcipal = 정보주체의
-//			
-//			// 유저 로그인 정보가 null이 아니라면
-//			if( principal != null) {
-//				// 이렇게 하면 session이 만들어집니다.
-//				session.setAttribute("principal", principal);
-//			}
-//			
-//			return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);			
-//		}
 }
+
+
+//// 전통적인 로그인 방식
+//// 다음시간에 스프링 시큐리티 이용해서 로그인!!
+//@PostMapping("/api/user/login")
+//public ResponseDto<Integer> login(@RequestBody User user, HttpSession session) {
+//	System.out.println("UserApiController : login 호출됨");
+//	User principal = userService.로그인(user);		// Printcipal = 정보주체의
+//	
+//	// 유저 로그인 정보가 null이 아니라면
+//	if( principal != null) {
+//		// 이렇게 하면 session이 만들어집니다.
+//		session.setAttribute("principal", principal);
+//	}
+//	
+//	return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);			
+//}

@@ -22,11 +22,12 @@ public class UserService {
 			// userRepository 하나의 트랜잭션
 			userRepository.save(user);
 		}
-		
-		// SELECT할 때 트랜잭션이 실행이 된다.
-		// 해당 서비스가 종료될 때 트랜잭션가 종료될텐데 이때까지는 데이터의 정합성을 유지할 수 있음
-		@Transactional(readOnly = true)
-		public User 로그인(User user) {
-			return user = userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
-		}
 }
+
+
+//// SELECT할 때 트랜잭션이 실행이 된다.
+//// 해당 서비스가 종료될 때 트랜잭션가 종료될텐데 이때까지는 데이터의 정합성을 유지할 수 있음
+//@Transactional(readOnly = true)
+//public User 로그인(User user) {
+//	return user = userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+//}
