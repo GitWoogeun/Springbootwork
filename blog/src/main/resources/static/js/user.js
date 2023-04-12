@@ -6,6 +6,9 @@ let index = {
 			$("#btn-save").on("click", ()=>{
 					this.save();		// <= 회원가입 버튼을 클릭 했을 시 save: function()을 호출
 			});
+			$("#btn-login").on("click", ()=>{
+					this.login();		// <= 회원가입 버튼을 클릭 했을 시 save: function()을 호출
+			});
 		},
 		
 		save: function(){
@@ -39,7 +42,33 @@ let index = {
 				// 응답의 결과가 실패 하면 fail을 실행
 				alert(JSON.spstringify(error));
 			});
-		}
+		},
+		
+		// 로그인 기능 구현
+		login: function(){
+			alert("로그인이 되었습니다.");
+			let data = {
+				username: $("#username").val(),					// form태그에 있는 태그의 id값을 찾아서 username 변수에 값을 바인딩 한다.
+				password: $("#password").val(),						// form태그에 있는 태그의 id값을 찾아서 password  변수에 값을 바인딩 한다.
+			};
+			
+			$.ajax({
+				type: "post",									// POST방식으로 전송
+				url: "/blog/api/user/login",		// UserApiController의 save() 함수 호출					
+				data: JSON.stringify(data),		// JSON 문자열로 data ( http body 데이터 ) 변경 (MIME 타입이 필요)
+				contentType: "application/json; charset=utf-8",
+				dataType: "json"							// 요청을 서버로해서 응답이 왔을 때 기본적으로 모든 것이 버퍼로 오기 때문에 응답값은 String 입니다.
+																		// dataType : JSON => 생긴게 JSON이라면 => javascript로 오브젝트 변경 
+			}).done(function(resp){					    
+				// 응답의 결과가 정상이면 done을 실행되는 영역
+				console.log(resp);
+				alert("로그인이 완료 되었습니다.");
+				location.href = "/blog";				// 로그인이 정상적으로 성공하면 main페이지로 이동
+			}).fail(function(error){
+				// 응답의 결과가 실패 하면 fail을 실행
+				alert(JSON.spstringify(error));
+			});
+	    }
 }
 
 index.init();

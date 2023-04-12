@@ -6,8 +6,15 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="contain"/>
+		<item key="selection" value=""/>
 		<list key="findhistory">
+			<item value="s"/>
+			<item value="loginForm"/>
+			<item value="login"/>
+			<item value="al"/>
+			<item value="alreay"/>
+			<item value="JSTL"/>
+			<item value="form"/>
 			<item value="contain"/>
 			<item value="action"/>
 			<item value="save"/>
@@ -16,13 +23,6 @@
 			<item value="Dynamic"/>
 			<item value="rol"/>
 			<item value="Save"/>
-			<item value="Crud"/>
-			<item value="crud"/>
-			<item value="CrudRep"/>
-			<item value="C"/>
-			<item value="Current"/>
-			<item value="create"/>
-			<item value="JSP"/>
 		</list>
 		<list key="replacehistory">
 			<item value="username"/>
