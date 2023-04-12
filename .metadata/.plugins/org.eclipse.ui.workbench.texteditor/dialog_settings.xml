@@ -6,9 +6,12 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="securi"/>
+		<item key="selection" value="password"/>
 		<list key="findhistory">
+			<item value="password"/>
+			<item value="alrea"/>
 			<item value="securi"/>
+			<item value="when"/>
 			<item value="securo"/>
 			<item value="secury"/>
 			<item value="s"/>
@@ -20,9 +23,6 @@
 			<item value="form"/>
 			<item value="contain"/>
 			<item value="action"/>
-			<item value="save"/>
-			<item value="Java Object"/>
-			<item value="drop"/>
 		</list>
 		<list key="replacehistory">
 			<item value="username"/>
