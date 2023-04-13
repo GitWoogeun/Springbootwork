@@ -17,7 +17,12 @@ PW : 콘솔 log에서 ctl + F 해서 password를 입력하면 password가 출력
 ┌─────────────────────────────────────────────────────────────────────────────────
 │ Spring Security를 사용하면서 변경된 페이지들 
 └─────────────────────────────────────────────────────────────────────────────────
-
+1. application.yml
+2. loginForm.jsp
+3. header.jsp
+4. user.js
+5. userApiController.java
+6. SecurityConfig.java
 ┌─────────────────────────────────────────────────────────────────────────────────
 │ 1번째 : application.yml에서 context-path '/' 변경 
 └─────────────────────────────────────────────────────────────────────────────────
@@ -151,3 +156,207 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .loginPage("/auth/loginForm");		// 처음 경로가 login 경로로 맞춘다.
     }
 }
+
+┌─────────────────────────────────────────────────────────────────────────────────
+│ 6번째 : SecurityConfig.java (추가) 설명  
+└─────────────────────────────────────────────────────────────────────────────────
+"@Configuration"
+# =>이 클래스 파일은 설정 파일이다라고 명시 해준다. ( Spring 컨테이너에 등록 )
+
+
+"@EnableWebSecurity"
+# => 보안 구성을 담당하는 클래스에서 @Configuration 어노테이션과 함께 사용 됩니다.
+#    @EnableWebSecurity 어노테이션을 사용하면 Spring Security의 기본 구성을 사용하거나
+#    사용자 정의 보안 구성을 지정할 수 있습니다.
+
+
+"@EnableWebSecurity 기능 활성화"
+# 1. Spring Security 필터 체인 등록
+# 2. authenticationManagerBuilder를 사용하여 인증을 설정하는 메서드를 노출하는 구성 클래스 등록
+# 3. EnableGlobalMethodSecurity 및 @PreAuthorize와 같은 다른 Spring Security 어노테이션을 사용하여
+#    메소드 수준의 보안 구성 활성화
+# 4. WebSecurityConfigurerAdapter로 확장하여 구현할 수 있습니다. 이를 통해 웹 보안 구성에 대한 다양한
+#    메서드를 재정의 할 수 있습니다.
+# 5. 즉 @EnableWebSecurity 어노테이션은 Spring Security를 사용하는 웹 애플리케이션에서 
+#    보안을 활성화하기 위해 필요한 기본적인 설정을 자동으로 처리 해줍니다.
+
+
+"WebSecurityConfigurerAdpter 상속 받으면 구현할 수 있는 기능들"
+
+1. configure(HttpSecurity http) 
+=> 메서드는 HTTP 요청에 대한 보안 구성을 설정하는 메서드입니다. 
+   예를 들어, 로그인 페이지, 로그아웃, 인증, 권한 등을 설정할 수 있습니다.;
+
+2. configure(WebSecurity web) 
+=> 메서드는 특정 요청 경로에서 보안 필터 체인을 무시하도록 설정하는 메서드입니다.
+
+3. configure(AuthenticationManagerBuilder auth) 
+=> 메서드는 인증 관련 구성을 설정하는 메서드입니다. 예를 들어, 
+   사용자 인증을 위한 UserDetailsService를 구현하거나, 비밀번호 암호화를 위한 PasswordEncoder를 설정할 수 있습니다.;
+
+4. authenticationManagerBean() 
+=> 메서드는 AuthenticationManager를 빈으로 등록하여 인증 관련 작업에서 사용할 수 있도록 합니다.
+
+5. userDetailsServiceBean() 
+=> 메서드는 UserDetailsService를 빈으로 등록하여 인증 작업에서 사용할 수 있도록 합니다.
+
+6. passwordEncoder() 
+=> 메서드는 PasswordEncoder를 빈으로 등록하여 인증 작업에서 사용할 수 있도록 합니다.
+
+7. sessionManagement() 
+=> 메서드는 세션 관리에 대한 구성을 설정하는 메서드입니다. 
+   예를 들어, 세션 고정 보호, 세션 유효 기간 등을 설정할 수 있습니다.;
+
+8. csrf() 
+=> 메서드는 CSRF(Cross-Site Request Forgery) 보호에 대한 구성을 설정하는 메서드입니다. 
+   예를 들어, 허용되는 요청 메서드, 예외 URL, 토큰의 이름 등을 설정할 수 있습니다.;
+
+9. cors() 메서드는 Cross-Origin Resource Sharing에 대한 구성을 설정하는 메서드입니다. 
+=> 예를 들어, 허용되는 도메인, 요청 헤더 등을 설정할 수 있습니다.;
+
+10. headers() 메서드는 HTTP 응답 헤더에 대한 구성을 설정하는 메서드입니다. 
+=> 예를 들어, 캐시 제어, XSS 보호 등을 설정할 수 있습니다.
+
+┌─────────────────────────────────────────────────────────────────────────────────
+│ 7번째 : SecurityConfig.java 파일을 적용한 자바 소스 구현  
+└─────────────────────────────────────────────────────────────────────────────────;
+"Security Config"
+// UserDetailsService를 구현한 UserService를 빈으로 등록합니다.
+// @Bean: 메서드가 생성한 객체를 스프링 컨테이너에 빈으로 등록합니다.
+@Bean
+public UserDetailsService userDetailsService() {
+    return new UserService();
+}
+
+// PasswordEncoder를 빈으로 등록합니다.
+@Bean
+public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+}
+
+// 인증 관련 구성을 설정합니다.
+@Override
+protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    auth.userDetailsService(userDetailsService()) // UserDetailsService를 사용하여 인증을 처리합니다.
+        .passwordEncoder(passwordEncoder()); // 비밀번호를 암호화합니다.
+}
+
+// HTTP 보안 구성을 설정합니다.
+@Override
+protected void configure(HttpSecurity http) throws Exception {
+    http
+        // 로그인 페이지 설정
+        .formLogin() // 폼 기반 로그인을 사용합니다.
+            .loginPage("/login") // 로그인 페이지의 URL을 설정합니다.
+            .permitAll() // 모든 사용자가 로그인 페이지에 접근할 수 있도록 허용합니다.
+        .and()
+        // 로그아웃 설정
+        .logout() // 로그아웃을 설정합니다.
+            .logoutSuccessUrl("/login") // 로그아웃 후 리다이렉트될 URL을 설정합니다.
+            .permitAll() // 모든 사용자가 로그아웃을 할 수 있도록 허용합니다.
+        .and()
+        // 인증 설정
+        .authorizeRequests() // 요청에 대한 인가를 설정합니다.
+            .antMatchers("/admin/**").hasRole("ADMIN") // "/admin"으로 시작하는 URL은 ADMIN 권한이 필요합니다.
+            .antMatchers("/user/**").hasAnyRole("USER", "ADMIN") // "/user"로 시작하는 URL은 USER 또는 ADMIN 권한이 필요합니다.
+            .anyRequest().authenticated(); // 모든 요청에 대해 인증된 사용자만 접근할 수 있도록 설정합니다.
+}
+
+
+config(HttpSecurity http)
+메서드에서는 로그인 페이지, 로그아웃, 인증 등을 설정합니다.
+/admin/**/ 경로는 ADMIN 권한을 가진 사용자만 접근할 수 있고,
+/user/**/  경로는 USER 또는 ADMIN권한을 가진 사용자만 접근할 수 있습니다.
+이외의 요청에 대해서는 인증된 사용자만 접근할 수 있도록 설정되었습니다.;
+
+"UserController"
+@Controller
+@RequestMapping("/user")
+public class UserController {
+
+    @Autowired
+    private UserService userService;
+
+    // /user/** 경로는 USER 또는 ADMIN 권한을 가진 사용자만 접근할 수 있습니다.
+    @GetMapping("/list")
+    // PreAuthorize 애너테이션을 이용하여 권한을 설정합니다.
+    // hasAnyRole() 메서드를 이용하여 USER 또는 ADMIN 권한을 가진 사용자만 접근할 수 있습니다.
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    public String userList(Model model) {
+        // UserService를 이용하여 사용자 목록을 조회합니다.
+        List<User> userList = userService.getUserList();
+        // 조회된 사용자 목록을 모델에 추가합니다.
+        model.addAttribute("userList", userList);
+        // 사용자 목록 페이지를 반환합니다.
+        return "user/list";
+    }
+
+    // /user/create 경로는 ADMIN 권한을 가진 사용자만 접근할 수 있습니다.
+    @GetMapping("/create")
+    // PreAuthorize 애너테이션을 이용하여 권한을 설정합니다.
+    // hasRole() 메서드를 이용하여 ADMIN 권한을 가진 사용자만 접근할 수 있습니다.
+    @PreAuthorize("hasRole('ADMIN')")
+    public String createUserForm(Model model) {
+        // 새로운 사용자를 생성하기 위한 폼을 모델에 추가합니다.
+        model.addAttribute("user", new User());
+        // 사용자 생성 폼 페이지를 반환합니다.
+        return "user/create";
+    }
+
+    @PostMapping("/create")
+    public String createUser(@ModelAttribute("user") User user, BindingResult result) {
+        // BindingResult를 이용하여 폼 데이터 유효성 검사를 수행합니다.
+        if (result.hasErrors()) {
+            // 유효성 검사에 실패한 경우, 사용자 생성 폼 페이지로 다시 이동합니다.
+            return "user/create";
+        }
+        // UserService를 이용하여 새로운 사용자를 생성합니다.
+        userService.createUser(user);
+        // 사용자 목록 페이지로 이동합니다.
+        return "redirect:/user/list";
+    }
+}
+
+@Service
+public class UserService implements UserDetailsService {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    // UserDetailsService 인터페이스를 구현한 loadUserByUsername() 메서드를 구현합니다.
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        // UserRepository를 이용하여 사용자 정보를 조회합니다.
+        User user = userRepository.findByUsername(username);
+        // 사용자 정보가 존재하지 않는 경우, 예외를 던집니다.
+        if (user == null) {
+            throw new UsernameNotFoundException("Invalid username or password.");
+        }
+        // 사용자 정보를 UserDetails 객체로 변환합니다.
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
+                getAuthority(user));
+    }
+
+    // 사용자 권한 정보를 반환하는 getAuthority() 메서드를 구현합니다.
+    private Set<SimpleGrantedAuthority> getAuthority(User user) {
+        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+        // 사용자가 가진 권한 정보를 SimpleGrantedAuthority 객체로 생성하여 Set 컬렉션에 추가합니다.
+        user.getRoles().forEach(role -> authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName())));
+        // Set 컬렉션을 반환합니다.
+        return authorities;
+    }
+
+    // 모든 사용자 정보를 조회하는 getUserList() 메서드를 구현합니다.
+    public List<User> getUserList() {
+        return userRepository.findAll();
+    }
+
+    // 새로운 사용자를 생성하는 createUser() 메서드를 구현합니다.
+    public void createUser(User user) {
+        // 사용자 비밀번호를 암호화하여 저장합니다.
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        // 사용자를 저장합니다.
+        userRepository.save(user);
+    }
+}
+
