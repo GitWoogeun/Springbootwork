@@ -15,7 +15,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 				
-				// request가 들어오면 
+				// request(요청)가 들어오면 
 			    //.antMatchers("/auth/loginForm", "/auth/joinForm")
 				http
 					.authorizeRequests()

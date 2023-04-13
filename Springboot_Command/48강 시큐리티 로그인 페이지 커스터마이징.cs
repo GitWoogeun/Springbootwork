@@ -279,7 +279,7 @@ public class UserController {
 
     // /user/** 경로는 USER 또는 ADMIN 권한을 가진 사용자만 접근할 수 있습니다.
     @GetMapping("/list")
-    // PreAuthorize 애너테이션을 이용하여 권한을 설정합니다.
+    // PreAuthorize 어노테이션을 이용하여 권한을 설정합니다.
     // hasAnyRole() 메서드를 이용하여 USER 또는 ADMIN 권한을 가진 사용자만 접근할 수 있습니다.
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public String userList(Model model) {
@@ -297,8 +297,22 @@ public class UserController {
     // hasRole() 메서드를 이용하여 ADMIN 권한을 가진 사용자만 접근할 수 있습니다.
     @PreAuthorize("hasRole('ADMIN')")
     public String createUserForm(Model model) {
+
+        # Model객체 :
+            Controller에서 View로 전달할 데이터를 담는 역할을 합니다.
+            즉 서버에서 처리한 결과를 뷰에 전달하기 위해 사용하는 객체 입니다.
+
+            Spring에서 Model 객체는 일반적으로 Map 인터페이스를 구현한 객체로 구현됩니다.
+            따라서 Model 객체는 key-value 형태로 데이터를 저장하고, 뷰에서는
+            이 Key를 이용하여 값을 참조할 수 있습니다.
+
+            예를 들어 Model 객체에 "name"이라는 key로 "john"이라는 값을 저장하면
+            뷰에서 ${name}이라는 표현식을 이용하여 이 값을 참조할 수 있습니다.
+
+
         // 새로운 사용자를 생성하기 위한 폼을 모델에 추가합니다.
         model.addAttribute("user", new User());
+
         // 사용자 생성 폼 페이지를 반환합니다.
         return "user/create";
     }
@@ -333,8 +347,7 @@ public class UserService implements UserDetailsService {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
         // 사용자 정보를 UserDetails 객체로 변환합니다.
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
-                getAuthority(user));
+        return new User(user.getUsername(), user.getPassword(), getAuthority(user));
     }
 
     // 사용자 권한 정보를 반환하는 getAuthority() 메서드를 구현합니다.
@@ -359,4 +372,3 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 }
-
