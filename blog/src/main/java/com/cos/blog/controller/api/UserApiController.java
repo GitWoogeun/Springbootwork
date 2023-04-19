@@ -2,6 +2,7 @@ package com.cos.blog.controller.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,17 +20,13 @@ public class UserApiController {
 		// DI ( Spring이 컴포넌트 스캔할 때 스프링 빈을 통해서 IoC에 띄어준다 )
 		@Autowired
 		private UserService userService;
-		
+	
 		// JSON이니까 @RequestBody로 파라미터 받음
 		// 통신상태를 확인하기 위해 HttpStatus.OK 
 		@PostMapping("/auth/joinProc")
 		public ResponseDto<Integer> save(@RequestBody User user) {		
 
-			System.out.println("UserApiController : save 호출됨!");
-			
-			// username, password, email 입력값 form태그에서 받음
-			// role은 back단에서 직접 넣어줘야함
-			user.setRole(RoleType.USER);
+			System.out.println("UserApiController : save 호출됨!"); 
 			
 			// 실제로 여기서 DB에 insert를 하고 아래에서 return이 되면 되요.
 			userService.회원가입(user);
