@@ -44,12 +44,10 @@ public class UserApiController {
 //public ResponseDto<Integer> login(@RequestBody User user, HttpSession session) {
 //	System.out.println("UserApiController : login 호출됨");
 //	User principal = userService.로그인(user);		// Printcipal = 정보주체의
-//	
 //	// 유저 로그인 정보가 null이 아니라면
 //	if( principal != null) {
 //		// 이렇게 하면 session이 만들어집니다.
 //		session.setAttribute("principal", principal);
 //	}
-//	
 //	return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);			
 //}
