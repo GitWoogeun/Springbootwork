@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +25,7 @@ public class UserApiController {
 		// JSON이니까 @RequestBody로 파라미터 받음
 		// 통신상태를 확인하기 위해 HttpStatus.OK 
 		@PostMapping("/auth/joinProc")
-		public ResponseDto<Integer> save(@RequestBody User user) {		
+		public ResponseDto<Integer> save(@RequestBody User user) {			// username, password, email
 
 			System.out.println("UserApiController : save 호출됨!"); 
 			
@@ -33,7 +34,13 @@ public class UserApiController {
 			
 			// 회원가입이 성공 시 [ 상태값 : 200, 1 ] 호출
 			// 자바 오브젝트를 JSON으로 변환해서 리턴 (Jackson)
-			return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);	
+			return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);			// 자바 오브젝트를 JSON으로 변환해서 리턴 ( Jackson )
+		}
+		
+		@PutMapping("/user")
+		public ResponseDto<Integer> update(@RequestBody User user){		// key = value, x-www-form-urlencoded
+			userService.회원수정(user);
+			return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 		}
 }
 
