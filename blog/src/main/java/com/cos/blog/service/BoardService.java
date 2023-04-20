@@ -16,6 +16,7 @@ public class BoardService {
 		@Autowired
 		private BoardRepository boardRepository;
 		
+		// 글 쓰기
 		// javax의 @Transaction
 		// 트랜잭션중 하나라도 실패를 한다면 커밋이 되지 않고 RollBack이 될겁니다.
 		@Transactional
@@ -25,18 +26,27 @@ public class BoardService {
 			boardRepository.save(board);
 		}
 		
+		// 페이징 처리
 		// Pageable을 리턴을 한다면 리턴 타입을 List가 아닌 Page로 해줘야한다.
 		// Page를 리턴 타입으로 지정할 시 이게 첫번째 페이지 인지 마지막 페이지 인지 확인할수 있다.
-		@Transactional
+		@Transactional(readOnly = true)
 		public Page<Board> 글목록(Pageable pageable) {
 				return boardRepository.findAll(pageable);
 		}
 		
-		@Transactional
+		// 글 상세보기
+		@Transactional(readOnly = true)
 		public Board 글상세보기(int id){
 				return boardRepository.findById(id)
 						.orElseThrow(()-> {
 								return new IllegalArgumentException("글 상세보기 아이디를 찾을 수 없습니다.");
 						});
+		}
+		
+		
+		// 글 삭제하기
+		@Transactional
+		public void 글삭제하기(int id) {
+				boardRepository.deleteById(id);
 		}
 }

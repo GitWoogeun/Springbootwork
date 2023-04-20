@@ -3,6 +3,8 @@ package com.cos.blog.controller.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,5 +33,11 @@ public class BoardApiController {
 			// 회원가입이 성공 시 [ 상태값 : 200, 1 ] 호출
 			// 자바 오브젝트를 JSON으로 변환해서 리턴 (Jackson)
 			return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);	
+		}
+		
+		@DeleteMapping("/api/board/{id}")
+		public ResponseDto<Integer> deleteById(@PathVariable int id){
+				boardService.글삭제하기(id);
+				return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 		}
 }
