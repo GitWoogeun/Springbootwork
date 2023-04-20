@@ -17,6 +17,7 @@ public class boardController {
 	@Autowired
 	private BoardService boardService;
 	
+	// 메인화면 이동
 	// 컨트롤러에서 어떻게 찾지?
 	// @AuthenticationPrincipal PrincipalDetail principal
 	// @PageableDefault => 페이징처리 ( SIZE = 보여주는 글 개수, SORT = 보여주는 기준, Sort.Direction.DESC = SORT 기준의 내림차순으로 정렬 ) 
@@ -30,6 +31,14 @@ public class boardController {
 		 
 	}
 	
+	// 회원가입 화면 이동
+	// USER 권한이 필요
+	@GetMapping("/board/saveForm")
+	public String saveForm() {
+		return "board/saveForm";
+	}
+	
+	// 글 상세보기 화면 이동
 	@GetMapping("/board/{id}")
 	public String findById(@PathVariable int id, Model model) {
 		model.addAttribute("board", boardService.글상세보기(id));
@@ -37,9 +46,10 @@ public class boardController {
 		return "board/detail";
 	}
 	
-	// USER 권한이 필요
-	@GetMapping("/board/saveForm")
-	public String saveForm() {
-		return "board/saveForm";
+	// 수정화면 이동
+	@GetMapping("/board/{id}/updateForm")
+	public String updateForm(@PathVariable int id, Model model){
+		model.addAttribute("board", boardService.글상세보기(id));
+		return "board/updateForm";
 	}
 }

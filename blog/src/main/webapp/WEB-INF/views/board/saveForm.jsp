@@ -7,12 +7,10 @@
 	
 	<form action="/auth/loginProc" method="post">
 		<div class="form-group">
-			<label for="title">제목</label>
 			 <input type="text"  placeholder="Enter title" class="form-control"  id="title">
 		</div>
 		
 		<div class="form-group">
-  			<label for="content">글 내용</label>
   			<textarea  class="form-control summernote" rows="5"  id="content">
   			
   			</textarea>
