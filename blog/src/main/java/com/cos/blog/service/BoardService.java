@@ -2,6 +2,8 @@ package com.cos.blog.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,8 +27,10 @@ public class BoardService {
 			boardRepository.save(board);
 		}
 		
+		// Pageable을 리턴을 한다면 리턴 타입을 List가 아닌 Page로 해줘야한다.
+		// Page를 리턴 타입으로 지정할 시 이게 첫번째 페이지 인지 마지막 페이지 인지 확인할수 있다.
 		@Transactional
-		public List<Board> 글목록() {
-				return boardRepository.findAll();
+		public Page<Board> 글목록(Pageable pageable) {
+				return boardRepository.findAll(pageable);
 		}
 }

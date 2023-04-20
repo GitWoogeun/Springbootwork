@@ -21,6 +21,7 @@
 	<button id="btn-save" class="btn btn-primary">글쓰기</button>
 </div>
 
+<!-- summer note 글 내용(textarea)을 꾸며주기 위해 사용 -->
 <script>
       $('.summernote').summernote({
         tabsize: 2,

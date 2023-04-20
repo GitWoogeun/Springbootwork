@@ -41,20 +41,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		protected void configure(HttpSecurity http) throws Exception {
 				
 				// request(요청)가 들어오면 
-			    //.antMatchers("/auth/loginForm", "/auth/joinForm")
+			    //.antMatchers("/auth/loginForm", "/auth/joinForm", "/dummy/**")
 				http
-					.csrf().disable()    																						// csrf 토큰 비활성화 ( 테스트 시 걸어두는 게 좋음 )
-					.authorizeRequests()																					// request가 들어오면 
-						.antMatchers("/", "/auth/**", "/js/**", "/css/**", "/image/**")	// 경로가 /auth/이하는 누구나 들어올 수 있어요!.		
-						.permitAll()																								// 누구나 다 
+					.csrf().disable()    																												// csrf 토큰 비활성화 ( 테스트 시 걸어두는 게 좋음 )
+					.authorizeRequests()																											// request가 들어오면 
+						.antMatchers("/", "/auth/**", "/js/**", "/css/**", "/image/**", "/dummy/**")	// 경로가 /auth/이하는 누구나 들어올 수 있어요!.		
+						.permitAll()																														// 누구나 다 
 						
-						.anyRequest()																							// 경로가 /auth/가 아닌 모든 요청은
-						.authenticated()  																					// 인증이 되어있어야 해요
+						.anyRequest()																													// 경로가 /auth/가 아닌 모든 요청은
+						.authenticated()  																											// 인증이 되어있어야 해요
 				
 					.and()
 						.formLogin()											
-						.loginPage("/auth/loginForm")															// 처음 경로가 login 경로로 맞춘다.
-						.loginProcessingUrl("/auth/loginProc")											// 스프링 시큐리티가 해당 주소로 로그인을 가로채서 대신 로그인 해준다
-						.defaultSuccessUrl("/");																			// 정상적으로 로그인 성공 시 이동하는 기본 URL
+						.loginPage("/auth/loginForm")																					// 처음 경로가 login 경로로 맞춘다.
+						.loginProcessingUrl("/auth/loginProc")																	// 스프링 시큐리티가 해당 주소로 로그인을 가로채서 대신 로그인 해준다
+						.defaultSuccessUrl("/");																									// 정상적으로 로그인 성공 시 이동하는 기본 URL
 		}
 }
