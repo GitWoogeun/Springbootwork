@@ -5,9 +5,12 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import com.cos.blog.model.User;
 
+import lombok.Getter;
+
 // 스프링 시큐리티가 로그인 요청을 가로채서 로그인을 진행하고 완료가 되면 UserDetails 타입의 오브젝트를
 // 스프링 시큐리티의 고유한 세션 저장소에 저장을 해준다.
 // PrincipalDetail이 저장된다. ( User 가 포함되어 있어야 한다. )
+@Getter			// Board에게 User 오브젝트를 전달해 주기 위해 Getter를 생성
 public class PrincipalDetail implements UserDetails {
 	
 		private User user;				// 콤포지션 ( 클래스에 클래스를 품고 있는 것 )

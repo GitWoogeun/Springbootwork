@@ -40,7 +40,6 @@ public class Board {
 		@Lob   // 대용량 데이터를 담을 때 쓰는 어노테이션
 		private String content;		// 섬머노트 라이브러리 ( 일반 글이 디자인이되어서 들어가는데 html 태그가 섞여서 들어간다 그래서 글자의 용량이 커진다 )
 		
-		@ColumnDefault("0")			// 얘는 int니까 ' '가 필요 없다.
 		private int count; 				// 조회수
 		
 		// Board라는 테이블에 userId 컬럼은 User테이블의  Id라는 컬럼을 참조하고 있다고 자동으로 FK 제약조건 생성
@@ -56,8 +55,7 @@ public class Board {
 
 			    # @OneToMany (fetch = FetchType.LAZY)
 			    => 필요하면 들고오고 필요하지 않으면 안들고 올게
-		 * */
-		
+		 * */		
 		//		@JoinColumn(name = "replyId")		// 이건 필요가 없다 : 실제 Board테이블에 Database에 FK replayId가 필요가 없다
 		//		: 1 정규화가 깨짐 ( 하나의 컬럼은 원자성을 가진다 하나의 값을 가져야 한다. )
 		//하나의 게시글은 여러개의 댓글을 가질수 있기 때문에 OneToMany
