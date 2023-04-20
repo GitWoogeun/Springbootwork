@@ -19,6 +19,7 @@
 		</div>
 	</form>
 	<button id="btn-save" class="btn btn-primary">글쓰기</button>
+	<button class="btn btn-info" onclick="history.back()">돌아가기</button>
 </div>
 
 <!-- summer note 글 내용(textarea)을 꾸며주기 위해 사용 -->
