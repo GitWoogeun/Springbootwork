@@ -1,5 +1,7 @@
 package com.cos.blog.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.cos.blog.model.User;
@@ -9,7 +11,8 @@ import com.cos.blog.model.User;
 // 얘는 한마디로 치면 DAO ( DataBase Object ) 라고 보면 된다.
 public interface UserRepository extends JpaRepository<User, Integer>{
 		
-		
+		// SELECT * FROM USER WHERE USERNAME = 1?;
+		Optional<User> findByUsername(String username);
 }
 
 // JpaRepository를 들어가서 찾아보면 

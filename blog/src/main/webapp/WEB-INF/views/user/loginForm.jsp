@@ -3,7 +3,7 @@
 <%@ include file="../layout/header.jsp"%>
 <!--  div class container : container는 header 영역과 footer 영역 안에 포함되어있는 공간 -->
 <div class="container">
-	<form action="#" method="post">
+	<form action="/auth/loginProc" method="post">
 	<!-- User Name -->
 		<div class="form-group">
 			<label for="username">User Name :</label>
@@ -13,11 +13,6 @@
 		<div class="form-group">
 			<label for="password">User Password :</label> 
 			<input type="password"  name="password" class="form-control" placeholder="Enter password" id="password">
-		</div>
-		<div class="form-group form-check">
-			<label class="form-check-label"> 
-			<input name="remember" class="form-check-input" type="checkbox"> 기억하기
-			</label>
 		</div>
 	<button id="btn-login" class="btn btn-primary">로그인</button>
 	</form>
