@@ -11,11 +11,13 @@ import com.cos.blog.repository.UserRepository;
 @Service
 public class UserService {
 	
+		// JPA방식의 데이터베이스 접근
 		@Autowired
-		private UserRepository userRepository;					// userRepository  
+		private UserRepository userRepository;
 		
+		// Password 암호화를 하기 위한 객체 생성
 		@Autowired
-		private BCryptPasswordEncoder encoder;				// Password 암호화를 하기 위한 객체 생성
+		private BCryptPasswordEncoder encoder;
 		
 		// javax의 @Transaction
 		// 회원가입 함수의 전체가 하나의 트랜잭션이 된다. 전체가 실행이되면 그때 커밋이 될꺼구요
@@ -39,11 +41,11 @@ public class UserService {
 					});
 			String rawPassword = user.getPassword();
 			String encPassword = encoder.encode(rawPassword);
-			
-			persistence.setPassword(encPassword);
-			persistence.setEmail(user.getEmail());
+
 			// 회원 수정 함수 종료 시 = 서비스 종료 = 트랜잭션 종료 = 커밋이 자동으로 됩니다.
 			// 영속화된 persistence 객체의 변화가 감지되면 더티체킹이 되어 update문을 날려줌.
+			persistence.setPassword(encPassword);
+			persistence.setEmail(user.getEmail());
 		}
 }
 

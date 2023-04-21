@@ -2,14 +2,12 @@ package com.cos.blog.controller.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.blog.dto.ResponseDto;
-import com.cos.blog.model.RoleType;
 import com.cos.blog.model.User;
 import com.cos.blog.service.UserService;
 
@@ -24,8 +22,9 @@ public class UserApiController {
 	
 		// JSON이니까 @RequestBody로 파라미터 받음
 		// 통신상태를 확인하기 위해 HttpStatus.OK 
+		// username, password, email
 		@PostMapping("/auth/joinProc")
-		public ResponseDto<Integer> save(@RequestBody User user) {			// username, password, email
+		public ResponseDto<Integer> save(@RequestBody User user) {
 
 			System.out.println("UserApiController : save 호출됨!"); 
 			
@@ -34,11 +33,14 @@ public class UserApiController {
 			
 			// 회원가입이 성공 시 [ 상태값 : 200, 1 ] 호출
 			// 자바 오브젝트를 JSON으로 변환해서 리턴 (Jackson)
-			return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);			// 자바 오브젝트를 JSON으로 변환해서 리턴 ( Jackson )
+			return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 		}
-		
+	
+		// 유저의 정상적인 통신이 된다면 상태값 200(성공)과 1을 리턴
+		// key = value, x-www-form-urlencoded
+		// @RequestBody : HTTP 요청 본문에 있는 데이터를 자동으로 자바의 객체로 변환 하는데 사용
 		@PutMapping("/user")
-		public ResponseDto<Integer> update(@RequestBody User user){		// key = value, x-www-form-urlencoded
+		public ResponseDto<Integer> update(@RequestBody User user){		
 			userService.회원수정(user);
 			return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 		}
