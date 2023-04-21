@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8000
   servlet:
     context-path: /                            # context-path : 내 프로젝트에 들어가기 위한 진입장벽   => http://localhost:8000/blog/~
     encoding:
