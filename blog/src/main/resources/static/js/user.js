@@ -46,9 +46,10 @@ let index = {
 		
 		update: function(){
 			let data = {
-				id: $("#id").val(),								// 영속성컨텍스트의 회원정보를 찾기위한 id 셋팅값
-				password: $("#password").val(),	// form태그에 있는 태그의 id값을 찾아서 password  변수에 값을 바인딩 한다.
-				email: $("#email").val()					// form태그에 있는 태그의 id값을 찾아서 email          변수에 값을 바인딩 한다.
+				id: $("#id").val(),								   // 영속성컨텍스트의 회원정보를 찾기위한 id 셋팅값
+				username: $("#username").val(), // form태그에 있는 태그의 id값을 찾아서 username 변수에 값을 바인딩 한다.
+				password: $("#password").val(),	  // form태그에 있는 태그의 id값을 찾아서 password  변수에 값을 바인딩 한다.
+				email: $("#email").val()					  // form태그에 있는 태그의 id값을 찾아서 email          변수에 값을 바인딩 한다.
 			};
 			
 			$.ajax({

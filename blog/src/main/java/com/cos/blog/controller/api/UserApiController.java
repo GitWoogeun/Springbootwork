@@ -2,6 +2,10 @@ package com.cos.blog.controller.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +23,11 @@ public class UserApiController {
 		// DI ( Spring이 컴포넌트 스캔할 때 스프링 빈을 통해서 IoC에 띄어준다 )
 		@Autowired
 		private UserService userService;
-	
+
+		@Autowired
+		private AuthenticationManager authenticationManager;
+
+		
 		// JSON이니까 @RequestBody로 파라미터 받음
 		// 통신상태를 확인하기 위해 HttpStatus.OK 
 		// username, password, email
@@ -40,8 +48,17 @@ public class UserApiController {
 		// key = value, x-www-form-urlencoded
 		// @RequestBody : HTTP 요청 본문에 있는 데이터를 자동으로 자바의 객체로 변환 하는데 사용
 		@PutMapping("/user")
-		public ResponseDto<Integer> update(@RequestBody User user){		
+		public ResponseDto<Integer> update(@RequestBody User user)
+		{		
 			userService.회원수정(user);
+			
+			// 트랜잭션이 종료되기 때문에 DB의 값은 변경이 되었지만,
+			// 하지만 Session 값은 변경되지 않은 상태이기 때문에 우리가 직접 Session값을 변경 해줄 것임.
+			// Session 등록
+			Authentication authentication = authenticationManager
+					.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+			
 			return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 		}
 }

@@ -55,6 +55,7 @@ public class BoardService {
 		public void 글수정하기(int id, Board requestBoard)
 		{
 				// 영속화
+				// IllegalArgumentException = 메소드에 전달된 인수가 잘못된 경우 발생하는 예외
 				Board board = boardRepository.findById(id)
 						.orElseThrow(()-> {
 							return new IllegalArgumentException("글 수정을 실패 : 아이디를 찾을수 없습니다.");
