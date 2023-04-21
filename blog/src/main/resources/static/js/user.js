@@ -63,7 +63,7 @@ let index = {
 				// 응답의 결과가 정상이면 done을 실행되는 영역
 				console.log(resp);
 				alert("회원정보가 수정이 완료 되었습나다,");
-				location.href = "/";				// 정상적으로 회원가입 후 다시 /blog url로 이동 
+				location.href = "/";							// 정상적으로 회원가입 후 다시 /blog url로 이동 
 				
 			}).fail(function(error){
 				// 응답의 결과가 실패 하면 fail을 실행
