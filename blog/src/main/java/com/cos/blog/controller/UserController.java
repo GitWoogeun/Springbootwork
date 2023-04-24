@@ -1,5 +1,7 @@
 package com.cos.blog.controller;
 
+import java.util.UUID;
+
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -124,10 +126,18 @@ public class UserController {
 			e.printStackTrace();
 		}
 		
-		System.out.println("카카오 프로파일 :: " + kakaoProfile);
 		
+		// User 오브젝트 : username, password, email
+		System.out.println("카카오 프로파일        : " + kakaoProfile);
 		System.out.println("카카오 아이디(번호) : " + kakaoProfile.getId());
 		System.out.println("카카오 이메일           : " + kakaoProfile.getKakao_account().getEmail());
+		
+		System.out.println("블로그 서버 유저네임 : " + kakaoProfile.getKakao_account().getEmail() + "-" + kakaoProfile.getId());
+		System.out.println("블로그 서버 이메일    : " +kakaoProfile.getKakao_account().getEmail());
+		
+		// 임시 패스워드 만들기위한 UUID 객체 사용 
+		UUID garbagePassword = UUID.randomUUID();
+		System.out.println("블로그 서버 패스워드 : " + garbagePassword);
 		
 		return response2.getBody();
 	}

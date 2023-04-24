@@ -1,0 +1,42 @@
+1. 웹 서버 주소 : http://localhost:8000
+2. 클라이언트 KEY = 3aaf6213852724e22060920d2d73c05b
+
+
+3. 카카오 로그인 콜백 주소    : http://localhost:8000/auth/kakao/callback
+4. 카카오 로그아웃 콜백 주소 : http://localhost:8000/auth/kakao/logout 
+
+
+5. 카카오 동의 구성 
+User Object : id(번호), username, password, email
+카카오로부터 받을 정보 : profile정보(필수), email(선택) 
+
+
+6. 로그인 요청 주소 : ( GET 방식 ) // (카카오는 https)
+https://kauth.kakao.com/oauth/authorize?client_id=${3aaf6213852724e22060920d2d73c05b}&redirect_uri=${http://localhost:8080/auth/kakao/callback}&response_type=code
+
+
+7. 응답받은 코드 : 
+http://localhost:8000/auth/kakao/callback?code=fpRQaIIhynpa8IePXJ10q2HKcoJBOICOGTfl7RfzPspD5seC33D2gZsF6w3PMSFRrYellQorDNQAAAGHomL17w
+
+이걸 받았다는건  정상적으로 로그인 인증 요청이 되었다는 것
+fpRQaIIhynpa8IePXJ10q2HKcoJBOICOGTfl7RfzPspD5seC33D2gZsF6w3PMSFRrYellQorDNQAAAGHomL17w
+
+
+8. 토큰 발급 요청 주소 : ( POST 방식 ) - http body에 데이터를 전달 ( 4가지 request 데이터를 담아라 )
+요청 주소           : https://kauth.kakao.com/oauth/token
+
+헤더 값 
+MINE TYPE : application/x-www-form-urlencoded;charset=utf-8 ( key = value )
+
+바디 값
+grant_type = authorization_code
+client_id     = 3aaf6213852724e22060920d2d73c05b
+redirect_uri = http://localhost:8000/auth/kakao/callback
+code          = {동적으로 생성됨}
+
+9. 토큰을 통한 사용자 정보 조회 ( POST )
+요청 주소 : https://kapi.kakao.com/v2/user/me
+헤더 값    : 
+Autorization : Bearer {access_token}
+Content-type: application/x-www-form-urlencoded; charset=utf-8
+

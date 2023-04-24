@@ -33,7 +33,7 @@ public class User {
 		private int id;																								// Oracle == 시퀀스, MySQL == auto_increament
 		
 		// null값이면 안된다. / 아이디의 길이는 30자까지 / 중복된 값을 넣어주지 않는다.
-		@Column(nullable = false, length = 30, unique = true)
+		@Column(nullable = false, length = 100, unique = true)
 		private String username;					// 아이디
 		
 		// null값이면 안된다. / 아이디의 길이는 100자까지  => 해쉬 ( 비밀번호 암호화 할꺼임 )
